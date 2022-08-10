@@ -7,4 +7,19 @@ const mul = (a, b) => a * b;
 const div = (a, b) => a / b;
 
 
-console.log(add(23, 6));
+const operate = (operator, num1, num2) => {
+    switch(operator){
+        case '+':
+            add(num1, num2);
+            break;
+        case '-':
+            sub(num1, num2);
+            break;
+        case 'x':
+            mul(num1, num2);
+            break;
+        case '÷':
+            div(num1, num2);
+            break;
+    }
+};
