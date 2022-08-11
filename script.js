@@ -1,3 +1,39 @@
+// UI Elements
+const display = document.querySelector('.display');
+const clear = document.querySelector('#clear');
+const backspace = document.querySelector('#backspace');
+const numbers = document.querySelectorAll('.number');
+
+
+const populateInput = () => {
+    numbers.forEach(number => number.addEventListener('click', (e) => {
+        display.textContent += e.target.id;
+    }));
+};
+
+
+const clearDisplay = () => {
+    clear.addEventListener('click', () => {
+        display.textContent = '';
+    });
+};
+
+const clearCharacter = () => {
+    backspace.addEventListener('click', () => {
+        if(display.textContent != ''){
+            let displayChars = display.textContent.split("");
+            displayChars.pop();
+            display.textContent = displayChars.join("");
+        }
+    });
+};
+
+populateInput();
+clearDisplay();
+clearCharacter();
+
+
+
 const add = (a, b) => a + b;
 
 const sub = (a, b) => a - b;
