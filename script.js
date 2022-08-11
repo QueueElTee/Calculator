@@ -3,11 +3,19 @@ const display = document.querySelector('.display');
 const clear = document.querySelector('#clear');
 const backspace = document.querySelector('#backspace');
 const numbers = document.querySelectorAll('.number');
+const operators = document.querySelectorAll('.operator');
 
 
-const populateInput = () => {
+const populateDisplay = () => {
     numbers.forEach(number => number.addEventListener('click', (e) => {
         display.textContent += e.target.id;
+    }));
+
+    operators.forEach(operator => operator.addEventListener('click', () => {
+        let numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        if(display.textContent != '' && numbers.includes(display.textContent.slice(-1))){
+            display.textContent += `${operator.textContent}`;
+        };
     }));
 };
 
@@ -18,17 +26,18 @@ const clearDisplay = () => {
     });
 };
 
+
 const clearCharacter = () => {
     backspace.addEventListener('click', () => {
         if(display.textContent != ''){
             let displayChars = display.textContent.split("");
             displayChars.pop();
             display.textContent = displayChars.join("");
-        }
+        };
     });
 };
 
-populateInput();
+populateDisplay();
 clearDisplay();
 clearCharacter();
 
