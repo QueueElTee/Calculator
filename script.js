@@ -127,4 +127,5 @@ clearCharacter();
 // 1. Update the operator and operand arrays when the backspace button is clicked
 // 2. Add support for decimal points and fix issue with decimal calculations
 // 3. Fix issue with negative numbers
-// 4. Add keyboard support
+// 4. Fix the NaN problems
+// 5. Add keyboard support
