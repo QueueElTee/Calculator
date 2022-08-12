@@ -4,6 +4,9 @@ const clear = document.querySelector('#clear');
 const backspace = document.querySelector('#backspace');
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
+const equals = document.querySelector('#equals');
+
+
 let calcNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 let operatorParameters = [];
 let operandParameters = [];
@@ -84,13 +87,33 @@ operators.forEach(operator => operator.addEventListener('click', () => {
             let exprDisplay = operate(currentOperator, num1, num2);
             display.textContent = `${exprDisplay}${nextOperator}`;
 
-            operatorParameters.splice(0, operatorParameters.length)
-            operandParameters.splice(0, operandParameters.length)
+            operatorParameters.splice(0, operatorParameters.length);
+            operandParameters.splice(0, operandParameters.length);
             operandParameters[0] = exprDisplay;
             operatorParameters[0] = nextOperator;
         }
     }
 }));
+
+
+// Evaluate Expression On Equals
+equals.addEventListener('click', () => {
+    if(display.textContent != '' && operatorParameters.length != 0){
+        let expressionResult = display.textContent.split(/[÷|x|+|-]/);
+        if(expressionResult.length == 2){
+            let num1 = parseInt(expressionResult[0]);
+            let num2 = parseInt(expressionResult[1]);
+            let currentOperator = operatorParameters[0];
+
+            let exprDisplay = operate(currentOperator, num1, num2);
+            display.textContent = `${exprDisplay}`;
+
+            operatorParameters.splice(0, operatorParameters.length);
+            operandParameters.splice(0, operandParameters.length);
+            operandParameters[0] = exprDisplay;
+        }
+    }
+});
 
 
 let testOperate = operate('-', 5, 7);
