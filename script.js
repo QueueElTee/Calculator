@@ -40,6 +40,19 @@ const clearCharacter = () => {
             let displayChars = display.textContent.split("");
             displayChars.pop();
             display.textContent = displayChars.join("");
+
+            let expressionResult = display.textContent.split(/[÷|x|+|-]/);
+
+            operandParameters.splice(0, operandParameters.length);
+
+            if(expressionResult.length == 2){
+                operandParameters[0] = expressionResult[0];
+                operandParameters[1] = expressionResult[1];
+            }
+            else if(expressionResult.length == 1 || expressionResult.length == 0){
+                operatorParameters.splice(0, operatorParameters.length);
+                operandParameters[0] = expressionResult[0];
+            }
         };
     });
 };
@@ -124,7 +137,6 @@ clearCharacter();
 
 
 // TODOS:
-// 1. Update the operator and operand arrays when the backspace button is clicked
 // 2. Add support for decimal points
 // 3. Fix issue with negative numbers
 // 4. Fix the NaN problems
