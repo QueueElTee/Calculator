@@ -5,6 +5,7 @@ const backspace = document.querySelector('#backspace');
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('#equals');
+const decimal = document.querySelector('#dot');
 
 
 let calcNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -112,7 +113,8 @@ operators.forEach(operator => operator.addEventListener('click', () => {
 // Evaluate Expression On Equals
 equals.addEventListener('click', () => {
    let expressionResult = display.textContent.split(/[÷|x|+|-]/);
-    if(expressionResult.length == 2){
+    // filter(e => e) removes empty spaces from the array
+    if(expressionResult.filter(e => e).length == 2){
         let num1 = parseFloat(expressionResult[0]);
         let num2 = parseFloat(expressionResult[1]);
         let currentOperator = operatorParameters[0];
@@ -124,6 +126,12 @@ equals.addEventListener('click', () => {
         operandParameters.splice(0, operandParameters.length);
         operandParameters[0] = exprDisplay;
     }
+});
+
+
+// Support For Decimal Points
+decimal.addEventListener('click', () => {
+    display.textContent += '.';
 });
 
 
@@ -139,5 +147,5 @@ clearCharacter();
 // TODOS:
 // 2. Add support for decimal points
 // 3. Fix issue with negative numbers
-// 4. Fix the NaN problems
+// 4. Add Custom Message When You Try To Divide By 0
 // 5. Add keyboard support
