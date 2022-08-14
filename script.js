@@ -131,7 +131,10 @@ equals.addEventListener('click', () => {
 
 // Support For Decimal Points
 decimal.addEventListener('click', () => {
-    display.textContent += '.';
+    let expressionResult = display.textContent.split(/[÷|x|+|-]/);
+    if(!expressionResult[0].includes('.') || !expressionResult[1].includes('.')){
+        display.textContent += '.';
+    }
 });
 
 
