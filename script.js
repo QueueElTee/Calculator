@@ -176,6 +176,5 @@ clearCharacter();
 
 
 // TODOS:
-// 1. Add Custom Message When You Try To Divide By 0
-// 2. Fix issue with negative numbers
+// 1. Fix issue with negative numbers
 // 3. Add keyboard support
