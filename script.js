@@ -131,9 +131,13 @@ equals.addEventListener('click', () => {
 
 // Support For Decimal Points
 decimal.addEventListener('click', () => {
-    let expressionResult = display.textContent.split(/[÷|x|+|-]/);
-    if(!expressionResult[0].includes('.') || !expressionResult[1].includes('.')){
-        display.textContent += '.';
+    try{
+        let expressionResult = display.textContent.split(/[÷|x|+|-]/);
+        if(!expressionResult[0].includes('.') || !expressionResult[1].includes('.')){
+            display.textContent += '.';
+        }
+    } catch(err){
+        console.log('Number contains a decimal');
     }
 });
 
@@ -148,7 +152,6 @@ clearCharacter();
 
 
 // TODOS:
-// 2. Add support for decimal points
-// 3. Fix issue with negative numbers
-// 4. Add Custom Message When You Try To Divide By 0
-// 5. Add keyboard support
+// 1. Add Custom Message When You Try To Divide By 0
+// 2. Fix issue with negative numbers
+// 3. Add keyboard support
