@@ -45,13 +45,13 @@ const clearCharacter = () => {
 };
 
 
-const add = (a, b) => a + b;
+const add = (a, b) => (a + b).toString().includes('.') ? (a + b).toFixed(2) : (a + b).toFixed(0);
 
-const sub = (a, b) => a - b;
+const sub = (a, b) => (a - b).toString().includes('.') ? (a - b).toFixed(2) : (a - b).toFixed(0);
 
-const mul = (a, b) => a * b;
+const mul = (a, b) => (a * b).toString().includes('.') ? (a * b).toFixed(2) : (a * b).toFixed(0);
 
-const div = (a, b) => a / b;
+const div = (a, b) => (a / b).toString().includes('.') ? (a / b).toFixed(2) : (a / b).toFixed(0);
 
 
 const operate = (operator, num1, num2) => {
@@ -79,8 +79,8 @@ operators.forEach(operator => operator.addEventListener('click', () => {
         if(operatorParameters.length == 2){
             operandParameters = display.textContent.split(/[÷|x|+|-]/);
             console.log(operandParameters);
-            let num1 = parseInt(operandParameters[0]);
-            let num2 = parseInt(operandParameters[1]);
+            let num1 = parseFloat(operandParameters[0]);
+            let num2 = parseFloat(operandParameters[1]);
             let currentOperator = operatorParameters[0];
             let nextOperator = operatorParameters[1];
 
@@ -100,8 +100,8 @@ operators.forEach(operator => operator.addEventListener('click', () => {
 equals.addEventListener('click', () => {
    let expressionResult = display.textContent.split(/[÷|x|+|-]/);
     if(expressionResult.length == 2){
-        let num1 = parseInt(expressionResult[0]);
-        let num2 = parseInt(expressionResult[1]);
+        let num1 = parseFloat(expressionResult[0]);
+        let num2 = parseFloat(expressionResult[1]);
         let currentOperator = operatorParameters[0];
 
         let exprDisplay = operate(currentOperator, num1, num2);
@@ -125,7 +125,7 @@ clearCharacter();
 
 // TODOS:
 // 1. Update the operator and operand arrays when the backspace button is clicked
-// 2. Add support for decimal points and fix issue with decimal calculations
+// 2. Add support for decimal points
 // 3. Fix issue with negative numbers
 // 4. Fix the NaN problems
 // 5. Add keyboard support
