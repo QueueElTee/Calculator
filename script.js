@@ -35,6 +35,13 @@ const clearDisplay = () => {
 };
 
 
+const clearDisplayAfterError = () => {
+    display.textContent = '';
+    operatorParameters = [];
+    operandParameters = [];
+};
+
+
 const clearCharacter = () => {
     backspace.addEventListener('click', () => {
         if(display.textContent != ''){
@@ -99,7 +106,13 @@ operators.forEach(operator => operator.addEventListener('click', () => {
             let nextOperator = operatorParameters[1];
 
             let exprDisplay = operate(currentOperator, num1, num2);
-            display.textContent = `${exprDisplay}${nextOperator}`;
+            if(isFinite(exprDisplay)){
+                display.textContent = `${exprDisplay}${nextOperator}`;
+            }
+            else{
+                divideByZero();
+                setTimeout(clearDisplayAfterError, 1000);
+            }
 
             operatorParameters.splice(0, operatorParameters.length);
             operandParameters.splice(0, operandParameters.length);
@@ -120,7 +133,13 @@ equals.addEventListener('click', () => {
         let currentOperator = operatorParameters[0];
 
         let exprDisplay = operate(currentOperator, num1, num2);
-        display.textContent = `${exprDisplay}`;
+        if(isFinite(exprDisplay)){
+            display.textContent = `${exprDisplay}`;
+        }
+        else{
+            divideByZero();
+            setTimeout(clearDisplayAfterError, 1000);
+        }
 
         operatorParameters.splice(0, operatorParameters.length);
         operandParameters.splice(0, operandParameters.length);
@@ -140,6 +159,11 @@ decimal.addEventListener('click', () => {
         console.log('Number contains a decimal');
     }
 });
+
+
+const divideByZero = () => {
+    display.textContent = 'Can\'t divide by zero.';
+};
 
 
 let testOperate = operate('-', 5.8, 7);
