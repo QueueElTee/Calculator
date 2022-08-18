@@ -243,8 +243,9 @@ window.addEventListener('keydown', e => {
 });
 
 
+
 // Support For Decimal Points
-decimal.addEventListener('click', () => {
+const addDecimal = () => {
     try{
         let expressionResult = display.textContent.split(/(?<=\d)[÷|x|+|-]/);
         if(!expressionResult[0].includes('.') || !expressionResult[1].includes('.')){
@@ -252,6 +253,20 @@ decimal.addEventListener('click', () => {
         }
     } catch(err){
         console.log('Number contains a decimal');
+    }
+};
+
+
+decimal.addEventListener('click', () => {
+   addDecimal();
+});
+
+
+window.addEventListener('keydown', e => {
+    let periodKeyCode = 190;
+
+    if(e.keyCode == periodKeyCode && e.shiftKey == false){
+        addDecimal();
     }
 });
 
