@@ -14,9 +14,17 @@ let operandParameters = [];
 
 
 const populateDisplay = () => {
+    let numberKeyCodes = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57];
+
     numbers.forEach(number => number.addEventListener('click', (e) => {
         display.textContent += e.target.id;
     }));
+
+    window.addEventListener('keydown', e => {
+        if(numberKeyCodes.includes(e.keyCode) && e.shiftKey == false){
+            display.textContent += e.key;
+        }
+    });
 
     operators.forEach(operator => operator.addEventListener('click', () => {
         if(display.textContent != '' && calcNumbers.includes(display.textContent.slice(-1))){
