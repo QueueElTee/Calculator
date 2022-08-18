@@ -49,7 +49,7 @@ const clearCharacter = () => {
             displayChars.pop();
             display.textContent = displayChars.join("");
 
-            let expressionResult = display.textContent.split(/[÷|x|+|-]/);
+            let expressionResult = display.textContent.split(/(?<=\d)[÷|x|+|-]/);
 
             operandParameters.splice(0, operandParameters.length);
 
@@ -98,7 +98,8 @@ operators.forEach(operator => operator.addEventListener('click', () => {
         }
 
         if(operatorParameters.length == 2){
-            operandParameters = display.textContent.split(/[÷|x|+|-]/);
+            // Splits the operands only if it is preceded by a number. (I did this so it doesen't cut of the minus symbol from negative numbers which may lead to inaccurate calculations.)
+            operandParameters = display.textContent.split(/(?<=\d)[÷|x|+|-]/);
             console.log(operandParameters);
             let num1 = parseFloat(operandParameters[0]);
             let num2 = parseFloat(operandParameters[1]);
@@ -125,7 +126,7 @@ operators.forEach(operator => operator.addEventListener('click', () => {
 
 // Evaluate Expression On Equals
 equals.addEventListener('click', () => {
-   let expressionResult = display.textContent.split(/[÷|x|+|-]/);
+   let expressionResult = display.textContent.split(/(?<=\d)[÷|x|+|-]/);
     // filter(e => e) removes empty spaces from the array
     if(expressionResult.filter(e => e).length == 2){
         let num1 = parseFloat(expressionResult[0]);
@@ -151,7 +152,7 @@ equals.addEventListener('click', () => {
 // Support For Decimal Points
 decimal.addEventListener('click', () => {
     try{
-        let expressionResult = display.textContent.split(/[÷|x|+|-]/);
+        let expressionResult = display.textContent.split(/(?<=\d)[÷|x|+|-]/);
         if(!expressionResult[0].includes('.') || !expressionResult[1].includes('.')){
             display.textContent += '.';
         }
@@ -176,5 +177,4 @@ clearCharacter();
 
 
 // TODOS:
-// 1. Fix issue with negative numbers
-// 3. Add keyboard support
+// 1. Add keyboard support
