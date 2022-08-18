@@ -34,19 +34,22 @@ const populateDisplay = () => {
 };
 
 
+const del = () => {
+    display.textContent = '';
+    operatorParameters = [];
+    operandParameters = [];
+}
+
+
 const clearDisplay = () => {
-    const del = () => {
-        display.textContent = '';
-        operatorParameters = [];
-        operandParameters = [];
-    }
+    let deleteKeyCode = 46;
 
     clear.addEventListener('click', () => {
         del();
     });
 
     window.addEventListener('keydown', e => {
-        if(e.keyCode == 46){
+        if(e.keyCode == deleteKeyCode){
             del();
         };
     });
@@ -54,9 +57,7 @@ const clearDisplay = () => {
 
 
 const clearDisplayAfterError = () => {
-    display.textContent = '';
-    operatorParameters = [];
-    operandParameters = [];
+    del();
 };
 
 
