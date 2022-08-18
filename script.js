@@ -35,10 +35,20 @@ const populateDisplay = () => {
 
 
 const clearDisplay = () => {
-    clear.addEventListener('click', () => {
+    const del = () => {
         display.textContent = '';
         operatorParameters = [];
-        operandParameters = []
+        operandParameters = [];
+    }
+
+    clear.addEventListener('click', () => {
+        del();
+    });
+
+    window.addEventListener('keydown', e => {
+        if(e.keyCode == 46){
+            del();
+        };
     });
 };
 
