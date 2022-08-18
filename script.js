@@ -203,8 +203,8 @@ window.addEventListener('keydown', e => {
 
 
 // Evaluate Expression On Equals
-equals.addEventListener('click', () => {
-   let expressionResult = display.textContent.split(/(?<=\d)[÷|x|+|-]/);
+const evaluateOnEquals = () => {
+    let expressionResult = display.textContent.split(/(?<=\d)[÷|x|+|-]/);
     // filter(e => e) removes empty spaces from the array
     if(expressionResult.filter(e => e).length == 2){
         let num1 = parseFloat(expressionResult[0]);
@@ -223,6 +223,21 @@ equals.addEventListener('click', () => {
         operatorParameters.splice(0, operatorParameters.length);
         operandParameters.splice(0, operandParameters.length);
         operandParameters[0] = exprDisplay;
+    }
+};
+
+
+equals.addEventListener('click', () => {
+    evaluateOnEquals();
+});
+
+
+window.addEventListener('keydown', e => {
+    let equalsKeyCode = 61;
+    let enterKeyCode = 13;
+
+    if((e.keyCode == equalsKeyCode && e.shiftKey == false) || e.keyCode == enterKeyCode){
+        evaluateOnEquals();
     }
 });
 
