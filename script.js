@@ -62,7 +62,9 @@ const clearDisplayAfterError = () => {
 
 
 const clearCharacter = () => {
-    backspace.addEventListener('click', () => {
+    let backSpaceKeyCode = 8;
+    
+    const clearChar = () => {
         if(display.textContent != ''){
             let displayChars = display.textContent.split("");
             displayChars.pop();
@@ -80,6 +82,16 @@ const clearCharacter = () => {
                 operatorParameters.splice(0, operatorParameters.length);
                 operandParameters[0] = expressionResult[0];
             }
+        };
+    };
+
+    backspace.addEventListener('click', () => {
+        clearChar();
+    });
+
+    window.addEventListener('keydown', e => {
+        if(e.keyCode == backSpaceKeyCode){
+            clearChar();
         };
     });
 };
