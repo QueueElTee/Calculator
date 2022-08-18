@@ -7,7 +7,6 @@ const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('#equals');
 const decimal = document.querySelector('#dot');
 
-
 let calcNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 let operatorParameters = [];
 let operandParameters = [];
@@ -153,6 +152,7 @@ const operate = (operator, num1, num2) => {
 };
 
 
+
 // Evaluate Expressions In Pairs
 const evaluateInPairs = (operatorVal) => {
     if(display.textContent != '' && calcNumbers.includes(display.textContent.slice(-1))){
@@ -162,7 +162,7 @@ const evaluateInPairs = (operatorVal) => {
         }
 
         if(operatorParameters.length == 2){
-            // Splits the operands only if it is preceded by a number. (I did this so it doesen't cut of the minus symbol from negative numbers which may lead to inaccurate calculations.)
+            // Splits the operands only if it is preceded by a number. (I did this so it doesen't cut off the minus symbol from negative numbers which may lead to inaccurate calculations.)
             operandParameters = display.textContent.split(/(?<=\d)[÷|x|+|-]/);
             console.log(operandParameters);
             let num1 = parseFloat(operandParameters[0]);
@@ -200,6 +200,7 @@ window.addEventListener('keydown', e => {
         }
     }
 });
+
 
 
 // Evaluate Expression On Equals
