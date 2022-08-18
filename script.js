@@ -12,6 +12,29 @@ let calcNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 let operatorParameters = [];
 let operandParameters = [];
 
+let operatorKeyInfo = {
+    plus: {
+        keyCode: 61,
+        shiftKey: true,
+        value: '+',
+    },
+    divide: {
+        keyCode: 191,
+        shiftKey: false,
+        value: '÷',
+    },
+    multiply: {
+        keyCode: 56,
+        shiftKey: true,
+        value: 'x',
+    },
+    subtract: {
+        keyCode: 173,
+        shiftKey: false,
+        value: '-',
+    },
+}
+
 
 const populateDisplay = () => {
     let numberKeyCodes = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57];
@@ -31,6 +54,16 @@ const populateDisplay = () => {
             display.textContent += `${operator.textContent}`;
         };
     }));
+
+    window.addEventListener('keydown', e => {
+        for (const operator in operatorKeyInfo){
+            if(e.keyCode == operatorKeyInfo[operator].keyCode && e.shiftKey == operatorKeyInfo[operator].shiftKey){
+                if(display.textContent != '' && calcNumbers.includes(display.textContent.slice(-1))){
+                    display.textContent += `${operatorKeyInfo[operator].value}`;
+                };
+            };
+        };
+    });
 };
 
 
@@ -63,7 +96,7 @@ const clearDisplayAfterError = () => {
 
 const clearCharacter = () => {
     let backSpaceKeyCode = 8;
-    
+
     const clearChar = () => {
         if(display.textContent != ''){
             let displayChars = display.textContent.split("");
@@ -121,10 +154,10 @@ const operate = (operator, num1, num2) => {
 
 
 // Evaluate Expressions In Pairs
-operators.forEach(operator => operator.addEventListener('click', () => {
+const evaluateInPairs = (operatorVal) => {
     if(display.textContent != '' && calcNumbers.includes(display.textContent.slice(-1))){
         if(operatorParameters.length < 2){
-            operatorParameters.push(operator.textContent);
+            operatorParameters.push(operatorVal);
             console.log(operatorParameters);
         }
 
@@ -152,7 +185,21 @@ operators.forEach(operator => operator.addEventListener('click', () => {
             operatorParameters[0] = nextOperator;
         }
     }
+};
+
+
+operators.forEach(operator => operator.addEventListener('click', () => {
+    evaluateInPairs(operator.textContent);
 }));
+
+
+window.addEventListener('keydown', e => {
+    for (const operator in operatorKeyInfo){
+        if(e.keyCode == operatorKeyInfo[operator].keyCode && e.shiftKey == operatorKeyInfo[operator].shiftKey){
+           evaluateInPairs(operatorKeyInfo[operator].value);
+        }
+    }
+});
 
 
 // Evaluate Expression On Equals
