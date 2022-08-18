@@ -88,6 +88,11 @@ const clearDisplay = () => {
 };
 
 
+const divideByZero = () => {
+    display.textContent = 'Can\'t divide by zero.';
+};
+
+
 const clearDisplayAfterError = () => {
     del();
 };
@@ -158,13 +163,12 @@ const evaluateInPairs = (operatorVal) => {
     if(display.textContent != '' && calcNumbers.includes(display.textContent.slice(-1))){
         if(operatorParameters.length < 2){
             operatorParameters.push(operatorVal);
-            console.log(operatorParameters);
         }
 
         if(operatorParameters.length == 2){
             // Splits the operands only if it is preceded by a number. (I did this so it doesen't cut off the minus symbol from negative numbers which may lead to inaccurate calculations.)
             operandParameters = display.textContent.split(/(?<=\d)[÷|x|+|-]/);
-            console.log(operandParameters);
+            
             let num1 = parseFloat(operandParameters[0]);
             let num2 = parseFloat(operandParameters[1]);
             let currentOperator = operatorParameters[0];
@@ -271,13 +275,6 @@ window.addEventListener('keydown', e => {
 });
 
 
-const divideByZero = () => {
-    display.textContent = 'Can\'t divide by zero.';
-};
-
-
-let testOperate = operate('-', 5.8, 7);
-console.log(testOperate);
 
 
 populateDisplay();
