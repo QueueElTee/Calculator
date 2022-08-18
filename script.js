@@ -283,7 +283,3 @@ console.log(testOperate);
 populateDisplay();
 clearDisplay();
 clearCharacter();
-
-
-// TODOS:
-// 1. Add keyboard support
