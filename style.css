@@ -64,3 +64,19 @@ body{
 .numbers >*, .operations >*{
     cursor: pointer;
 }
+
+
+
+/* Media Queries */
+@media(max-width: 599px){
+    .inputs{
+        height: 55vh;
+    }
+    .display{
+        font-size: 2rem;
+        padding-top: 1.5rem;
+    }
+    .calculator{
+        width: 95%;
+    }
+}
