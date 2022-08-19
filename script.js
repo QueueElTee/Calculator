@@ -13,22 +13,22 @@ let operandParameters = [];
 
 let operatorKeyInfo = {
     plus: {
-        keyCode: 61,
+        key: '+',
         shiftKey: true,
         value: '+',
     },
     divide: {
-        keyCode: 191,
+        key: '/',
         shiftKey: false,
         value: '÷',
     },
     multiply: {
-        keyCode: 56,
+        key: '*',
         shiftKey: true,
         value: 'x',
     },
     subtract: {
-        keyCode: 173,
+        key: '-',
         shiftKey: false,
         value: '-',
     },
@@ -36,14 +36,12 @@ let operatorKeyInfo = {
 
 
 const populateDisplay = () => {
-    let numberKeyCodes = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57];
-
     numbers.forEach(number => number.addEventListener('click', (e) => {
         display.textContent += e.target.id;
     }));
 
     window.addEventListener('keydown', e => {
-        if(numberKeyCodes.includes(e.keyCode) && e.shiftKey == false){
+        if(calcNumbers.includes(e.key) && e.shiftKey == false){
             display.textContent += e.key;
         }
     });
@@ -56,7 +54,7 @@ const populateDisplay = () => {
 
     window.addEventListener('keydown', e => {
         for (const operator in operatorKeyInfo){
-            if(e.keyCode == operatorKeyInfo[operator].keyCode && e.shiftKey == operatorKeyInfo[operator].shiftKey){
+            if(e.key == operatorKeyInfo[operator].key && e.shiftKey == operatorKeyInfo[operator].shiftKey){
                 if(display.textContent != '' && calcNumbers.includes(display.textContent.slice(-1))){
                     display.textContent += `${operatorKeyInfo[operator].value}`;
                 };
@@ -74,14 +72,14 @@ const del = () => {
 
 
 const clearDisplay = () => {
-    let deleteKeyCode = 46;
+    let deleteKey = 'Delete';
 
     clear.addEventListener('click', () => {
         del();
     });
 
     window.addEventListener('keydown', e => {
-        if(e.keyCode == deleteKeyCode){
+        if(e.key == deleteKey){
             del();
         };
     });
@@ -99,7 +97,7 @@ const clearDisplayAfterError = () => {
 
 
 const clearCharacter = () => {
-    let backSpaceKeyCode = 8;
+    let backSpaceKey = 'Backspace';
 
     const clearChar = () => {
         if(display.textContent != ''){
@@ -127,7 +125,7 @@ const clearCharacter = () => {
     });
 
     window.addEventListener('keydown', e => {
-        if(e.keyCode == backSpaceKeyCode){
+        if(e.key == backSpaceKey){
             clearChar();
         };
     });
@@ -199,7 +197,7 @@ operators.forEach(operator => operator.addEventListener('click', () => {
 
 window.addEventListener('keydown', e => {
     for (const operator in operatorKeyInfo){
-        if(e.keyCode == operatorKeyInfo[operator].keyCode && e.shiftKey == operatorKeyInfo[operator].shiftKey){
+        if(e.key == operatorKeyInfo[operator].key && e.shiftKey == operatorKeyInfo[operator].shiftKey){
            evaluateInPairs(operatorKeyInfo[operator].value);
         }
     }
@@ -238,10 +236,10 @@ equals.addEventListener('click', () => {
 
 
 window.addEventListener('keydown', e => {
-    let equalsKeyCode = 61;
-    let enterKeyCode = 13;
+    let equalsKey = '=';
+    let enterKey = 'Enter';
 
-    if((e.keyCode == equalsKeyCode && e.shiftKey == false) || e.keyCode == enterKeyCode){
+    if((e.key == equalsKey && e.shiftKey == false) || e.key == enterKey){
         evaluateOnEquals();
     }
 });
@@ -267,9 +265,9 @@ decimal.addEventListener('click', () => {
 
 
 window.addEventListener('keydown', e => {
-    let periodKeyCode = 190;
+    let periodKey = '.';
 
-    if(e.keyCode == periodKeyCode && e.shiftKey == false){
+    if(e.key == periodKey && e.shiftKey == false){
         addDecimal();
     }
 });
